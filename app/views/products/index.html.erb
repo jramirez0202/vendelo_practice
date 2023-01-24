@@ -1,0 +1,8 @@
+<h1>Hola</h1>
+<h2><%=@products.count%></h2>
+<% @products.each do |product| %>
+    <h1>Venta de PS5</h1>
+    <li><%=product.title%></li>
+    <li><%=product.description%></li>
+    <li><%=product.price%></li>
+<%end%>
