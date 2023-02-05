@@ -38,10 +38,12 @@ class ProductsController < ApplicationController
     def destroy
         @product = Product.find(params[:id])
         @product.destroy
-        redirect_to :action => :index
-
-        # redirect_to products_path, notice: 'Product was deleted', status: :see_other
-    end
+    
+        respond_to do |format|
+          format.html { redirect_to products_url, notice: "Book was successfully destroyed." }
+          format.json { head :no_content }
+        end
+      end
     
     private
 
