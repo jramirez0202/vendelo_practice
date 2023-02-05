@@ -90,4 +90,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+
+  #esto lo agregue para solucionas problema de 'cannot load such file -- sassc'
+  config.assets.css_compressor = :yui
+  config.assets.js_compressor = :terser 
 end

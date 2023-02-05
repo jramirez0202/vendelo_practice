@@ -32,6 +32,7 @@ class ProductControllerTest < ActionDispatch::IntegrationTest
         }
       }
 			assert_redirected_to products_path
+      assert_equal flash[:notice], 'Product was successfully created'
     end
 
     test 'does not allow to create a new product whit empty fields' do
@@ -43,6 +44,34 @@ class ProductControllerTest < ActionDispatch::IntegrationTest
         }
       }
 			assert_response :unprocessable_entity
+    end
+
+    test 'allow to update a product' do
+      patch product_path(products(:ps4)), params: { 
+        product: { 
+          price: 200
+        }
+      }
+			assert_redirected_to products_path
+      assert_equal flash[:notice], 'product was successfully updated.'
+    end
+
+    test 'does not allow to update a product' do
+      patch product_path(products(:ps4)), params: { 
+        product: { 
+          price: nil
+        }
+      }
+        assert_response :unprocessable_entity
+    end
+
+    test 'can delete product' do
+      assert_difference('Product.count', -1) do
+        delete product_path(products(:ps4))
+      end
+
+      assert_redirected_to products_path
+      assert_equal flash[:notice], 'Product was deleted '
     end
 
 
