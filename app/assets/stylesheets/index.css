@@ -17,3 +17,23 @@ body {
     height: 50px;
     border-radius: 50%;
 }
+/* imagenes visuales */
+section{
+    display: flex;
+    width: 700px;
+    height: 430;
+}
+
+section .img{
+    width: 10px;
+    flex-grow: 1;
+    object-fit: cover;
+    opacity: .7;
+}
+section .img:hover{
+    cursor: crosshair;
+    width: 300px;
+    opacity: 1;
+    filter: contrast(120%);
+}
+/* imagenes visuales */

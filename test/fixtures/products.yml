@@ -4,8 +4,18 @@ ps4:
   title: PS4 Fat
   description: PS4 en buen estado
   price: 100
+  category: videogames
 
 Nintendo switch:
   title: Nintendo
   description: Ta bueno
   price: 200
+  category: videogames
+
+air:
+  title: Macbook Air
+  description: falla la tecla
+  price: 500
+  category: computers
+
+  

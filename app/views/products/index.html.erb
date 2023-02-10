@@ -1,7 +1,8 @@
-<h1>Productos:</h1>
-<% @products.each do |product| %>
-    <%= link_to product_path(product.id), class: 'product' do %>
-        <span><%=product.title%></span>
-        <strong><li><%=product.price%></li></strong>
-    <%end%>
+<%= turbo_frame_tag 'categories' do %>
+    <h1>Productos:</h1>
+
+    <%= render partial: 'product', collection: @products %>
+    <%= render partial: 'category', collection: @categories %>
+    <%= link_to 'All', products_path%>
+    <!-- <%= render '/shared/imagesOnePunch' %> -->
 <%end%>

@@ -1,11 +1,20 @@
 require 'test_helper'
 class ProductControllerTest < ActionDispatch::IntegrationTest
-    test 'render list of products' do
+    test 'render list of products in index' do
         get products_path
 
         assert_response :success
-        assert_select '.product', 2
+        assert_select '.product', 3
+        assert_select '.category', 3
     end
+
+    test 'render a list of products filtered by category' do
+      get products_path(category_id: categories(:computers).id)
+
+      assert_response :success
+      assert_select '.product', 1
+
+  end
 
     test 'render detailed product page' do
         get product_path(products(:ps4))
@@ -28,7 +37,8 @@ class ProductControllerTest < ActionDispatch::IntegrationTest
         product: { 
           title: 'Nintendo 64',
           description:'Le falta un control',
-          price: 200
+          price: 200,
+          category_id: categories(:videogames).id
         }
       }
 			assert_redirected_to products_path
@@ -71,7 +81,7 @@ class ProductControllerTest < ActionDispatch::IntegrationTest
       end
 
       assert_redirected_to products_path
-      assert_equal flash[:notice], 'Product was deleted '
+      assert_equal flash[:notice], 'Product was deleted'
     end
 
 

@@ -3,5 +3,9 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+#   product = Product.create(title: 'Radio', description:'Esto es un ejemplo', price:1000)
+# product.save
+
+10.times do |i|
+    Product.create(title: "Producto #{i}", description: "Description completa #{i}",price: 2*i)
+  end

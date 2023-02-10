@@ -1,11 +1,16 @@
 class ProductsController < ApplicationController
     
     def index
-        @products = Product.all
+
+        @categories = Category.all.order(name: :asc).load_async
+        @products = Product.all.with_attached_photo.order(created_at: :desc).load_async
+        if params[:category_id]
+            @products = @products.where(category_id: params[:category_id])
+        end
     end
 
     def show
-        @product = Product.find(params[:id])
+        product
     end
 
     def new
@@ -13,11 +18,15 @@ class ProductsController < ApplicationController
     end
 
     def edit
-        @product = Product.find(params[:id])
+        product
+    end
+
+    def image
+        @products = Product.all
     end
 
     def update
-        @product = Product.find(params[:id])
+        product
 
         if @product.update(product_params)
             redirect_to products_path, notice: 'product was successfully updated.'
@@ -36,11 +45,10 @@ class ProductsController < ApplicationController
     end 
 
     def destroy
-        @product = Product.find(params[:id])
-        @product.destroy
+        product.destroy
     
         respond_to do |format|
-          format.html { redirect_to products_url, notice: "Book was successfully destroyed." }
+          format.html { redirect_to products_url, notice: 'Product was deleted' }
           format.json { head :no_content }
         end
       end
@@ -48,7 +56,11 @@ class ProductsController < ApplicationController
     private
 
     def product_params
-        params.require(:product).permit(:title, :description, :price)
+        params.require(:product).permit(:title, :description, :price, :photo, :category_id)
+    end
+
+    def product
+        @product = Product.find(params[:id])
     end
     
 end

@@ -1,3 +1,5 @@
+<%= image_tag @product.photo, width:200 if @product.photo.attached? %>
+
 <h1 class='title'><%= @product.title %></h1>
 
 <p class='description'> <%= @product.description %></p>
@@ -6,8 +8,8 @@
 
 <div>
     <br>
-    <%= link_to 'Edit product', edit_product_path(@product), data: { confirm: '¿Estas seguro?' }, class: 'btn btn-warning'  %>
+    <%= link_to 'Edit product', edit_product_path(@product), class: 'btn btn-warning'  %>
 </div>
 
-<%= button_to "Destroy this book", @product, method: :delete %>
+<%= button_to "Delete product", @product, method: :delete, class: 'btn btn-danger'%>
 
