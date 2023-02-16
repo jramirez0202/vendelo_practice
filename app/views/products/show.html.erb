@@ -11,5 +11,6 @@
     <%= link_to 'Edit product', edit_product_path(@product), class: 'btn btn-warning'  %>
 </div>
 
-<%= button_to "Delete product", @product, method: :delete, class: 'btn btn-danger'%>
+<!-- <%= button_to "Delete product", @product, method: :delete, class: 'btn btn-danger'%> -->
+<%= button_to "Destroy", @product, method: :delete, form: { data: {turbo_confirm: 'Are you sure?'} } %>
 
